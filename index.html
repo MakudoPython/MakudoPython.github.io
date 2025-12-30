@@ -1,24 +1,79 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Makudo Portfolio</title>
+
   <style>
-    body {
+    body{
       font-family: sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 40px;
+      background:#f5f5f5;
+      margin:0;
+      padding:40px;
+      line-height:1.7;
     }
-    .box {
-      max-width: 700px;
-      margin: auto;
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
+
+    .box{
+      max-width:700px;
+      margin:auto;
+      background:#fff;
+      padding:30px;
+      border-radius:12px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    h1{ margin-top:0; }
+
+    /* 記事カード */
+    .articles{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      gap:16px;
+    }
+
+    .article-card{
+      display:block;
+      text-decoration:none;
+      color:inherit;
+      border:1px solid #eee;
+      border-radius:12px;
+      overflow:hidden;
+      background:#fff;
+      transition:transform .12s, box-shadow .12s;
+    }
+
+    .article-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 24px rgba(0,0,0,0.10);
+    }
+
+    .article-thumb{
+      width:100%;
+      max-width:320px;     /* 画像を大きくしすぎない */
+      display:block;
+    }
+
+    .article-body{
+      padding:12px 14px 14px;
+    }
+
+    .article-title{
+      margin:0;
+      font-size:16px;
+      font-weight:700;
+    }
+
+    .article-meta{
+      margin:6px 0 0;
+      font-size:13px;
+      color:#666;
     }
   </style>
 </head>
+
 <body>
   <div class="box">
     <h1>Makudo</h1>
@@ -32,14 +87,17 @@
 
     <h2>記事</h2>
 
-<a href="first-post.md">
-  <img src="Abe.webp"
-       alt="はじめてのMarkdown記事"
-       style="max-width:300px; border-radius:8px;">
-</a>
-
-<p>はじめてのMarkdown記事</p>
-
+    <ul class="articles">
+      <li>
+        <a class="article-card" href="first-post.md">
+          <img class="article-thumb" src="Abe.webp" alt="はじめてのMarkdown記事" />
+          <div class="article-body">
+            <p class="article-title">はじめてのMarkdown記事</p>
+            <p class="article-meta">GitHub PagesでMarkdownを試した</p>
+          </div>
+        </a>
+      </li>
+    </ul>
 
     <p>GitHub / X / etc</p>
   </div>
