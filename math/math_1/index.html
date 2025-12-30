@@ -3,15 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <title>第1章 | 三角形の基本定理</title>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 40px;
+      line-height: 1.7;
+    }
+
+    .box {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .content {
+      display: flex;
+      gap: 32px;
+    }
+
+    .main {
+      flex: 2;
+    }
+
+    .side {
+      flex: 1;
+      background: #f7f7f7;
+      padding: 16px;
+      border-radius: 8px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: #5a2bd8;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .back {
+      margin-top: 24px;
+      display: inline-block;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>第1章　三角形の基本定理</h1>
+  <div class="box">
+    <h1>第1章　三角形の基本定理</h1>
 
-  <ul>
-    <li><a href="sine-law.html">正弦定理</a></li>
-    <li><a href="cosine-law.html">余弦定理</a></li>
-  </ul>
+    <div class="content">
+      <!-- 左：章の目次 -->
+      <div class="main">
+        <h2>内容</h2>
+        <ul>
+          <li><a href="sine-law.html">正弦定理</a></li>
+          <li><a href="cosine-law.html">余弦定理</a></li>
+        </ul>
 
-  <a href="../">← 数学トップに戻る</a>
+        <a class="back" href="../">← 数学トップに戻る</a>
+      </div>
+
+      <!-- 右：ランダム問題（仮） -->
+      <div class="side">
+        <h2>ランダム問題</h2>
+        <p>ここにランダムで問題を表示する予定。</p>
+        <p>（あとで JavaScript を追加）</p>
+
+        <button disabled>問題を出す</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
