@@ -42,17 +42,17 @@
       border-radius:12px;
       overflow:hidden;
       background:#fff;
-      transition:transform .12s, box-shadow .12s;
+      transition:transform .12s ease, box-shadow .12s ease;
     }
 
     .article-card:hover{
       transform:translateY(-2px);
-      box-shadow:0 10px 24px rgba(0,0,0,0.10);
+      box-shadow:0 10px 24px rgba(0,0,0,0.12);
     }
 
     .article-thumb{
       width:100%;
-      max-width:320px;     /* 画像を大きくしすぎない */
+      max-width:320px;
       display:block;
     }
 
@@ -89,7 +89,8 @@
 
     <ul class="articles">
       <li>
-        <a href="first-post.html">
+        <!-- ★ ここが重要 -->
+        <a class="article-card" href="first-post.md">
           <img class="article-thumb" src="Abe.webp" alt="はじめてのMarkdown記事" />
           <div class="article-body">
             <p class="article-title">はじめてのMarkdown記事</p>
