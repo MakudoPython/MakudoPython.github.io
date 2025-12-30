@@ -1,9 +1,9 @@
 ---
 layout: default
-title: はじめてのMarkdown記事
+title: はじめての記事
 ---
 
-GitHub Pagesで、はじめてMarkdownで記事を書いてみた。
+GitHub Pagesで、はじめて記事を書いてみた。
 
 ## 今日やったこと
-- Markdownで記事を書いた
+- 記事を書いた
