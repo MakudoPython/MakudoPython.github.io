@@ -1,15 +1,360 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>正弦定理 | ランダム問題</title>
-</head>
-<body>
-  <h1>正弦定理：ランダム問題</h1>
-  <p>ここに正弦定理のランダム問題を置く予定。</p>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>正弦定理：ランダム問題</title>
 
-  <p><a href="sine-law.html">← 正弦定理に戻る</a></p>
-  <p><a href="../">← 数学トップに戻る</a></p>
+  <!-- 数式表示（任意） -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body{
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:#f5f5f5;
+      margin:0;
+      padding:40px;
+      line-height:1.8;
+      color:#222;
+    }
+    .box{
+      max-width:860px;
+      margin:auto;
+      background:#fff;
+      padding:28px;
+      border-radius:14px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+    }
+    h1{ margin:0 0 14px; font-size:26px; }
+    h2{ margin:22px 0 10px; font-size:18px; }
+    .muted{ color:#666; font-size:14px; }
+
+    .controls{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:end;
+      background:#fafafa;
+      border:1px solid #eee;
+      padding:14px;
+      border-radius:12px;
+      margin:16px 0 22px;
+    }
+    label{ font-size:14px; color:#333; display:block; margin-bottom:6px; }
+    select, button{
+      font-size:14px;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid #ddd;
+      background:#fff;
+    }
+    button{
+      cursor:pointer;
+      background:#111;
+      color:#fff;
+      border:1px solid #111;
+    }
+    button:hover{ opacity:0.92; }
+
+    .card{
+      border:1px solid #eee;
+      border-radius:12px;
+      padding:14px;
+      margin:12px 0;
+      background:#fff;
+    }
+    .card-title{
+      font-weight:700;
+      margin-bottom:8px;
+    }
+    .btn-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .btn-sub{
+      background:#fff;
+      color:#111;
+      border:1px solid #ddd;
+    }
+    .btn-sub:hover{ background:#f6f6f6; }
+
+    .solution{
+      margin-top:12px;
+      padding:12px;
+      background:#fbfbff;
+      border:1px dashed #d7d7ff;
+      border-radius:10px;
+      display:none;
+    }
+
+    a{ color:#6b21a8; }
+    .links{ margin-top:18px; }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h1>正弦定理：ランダム問題</h1>
+    <div class="muted">
+      正弦定理 \( \dfrac{a}{\sin A}=\dfrac{b}{\sin B}=\dfrac{c}{\sin C} \) を使う練習ページ。
+    </div>
+
+    <h2>例題（固定）</h2>
+    <div class="card">
+      <div class="card-title">例題1</div>
+      <div>
+        三角形ABCで、\(A=40^\circ\)、\(B=65^\circ\)、辺 \(a=10\) のとき、辺 \(b\) を求めよ。
+      </div>
+      <div class="solution" style="display:block;">
+        <div>
+          正弦定理より \(\dfrac{a}{\sin A}=\dfrac{b}{\sin B}\)。<br>
+          \(b = a\dfrac{\sin B}{\sin A}=10\dfrac{\sin65^\circ}{\sin40^\circ}\approx 14.1\)
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">例題2</div>
+      <div>
+        三角形ABCで、\(A=55^\circ\)、\(C=50^\circ\)、辺 \(c=12\) のとき、辺 \(a\) を求めよ。
+      </div>
+      <div class="solution" style="display:block;">
+        <div>
+          正弦定理より \(\dfrac{a}{\sin A}=\dfrac{c}{\sin C}\)。<br>
+          \(a = c\dfrac{\sin A}{\sin C}=12\dfrac{\sin55^\circ}{\sin50^\circ}\approx 12.8\)
+        </div>
+      </div>
+    </div>
+
+    <h2>ランダム生成</h2>
+    <div class="controls">
+      <div>
+        <label for="difficulty">難易度</label>
+        <select id="difficulty">
+          <option value="basic">基礎</option>
+          <option value="applied">応用（やさしめ）</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="count">問題数</label>
+        <select id="count">
+          <option value="1">1問</option>
+          <option value="2">2問</option>
+          <option value="3">3問</option>
+        </select>
+      </div>
+
+      <div>
+        <button id="generateBtn">問題を生成</button>
+      </div>
+    </div>
+
+    <div id="problems"></div>
+
+    <div class="links">
+      <a href="sine.html">← 正弦定理に戻る</a><br>
+      <a href="math.html">← 数学トップに戻る</a>
+    </div>
+  </div>
+
+  <script>
+    // ---- 便利関数 ----
+    const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    const toRad = (deg) => deg * Math.PI / 180;
+    const sinDeg = (deg) => Math.sin(toRad(deg));
+    const round1 = (x) => Math.round(x * 10) / 10;
+
+    // 角度をいい感じに作る（極端な形を避ける）
+    function makeAngles(level){
+      // 基礎: 30〜80くらいで作る
+      // 応用: 少し広げる（20〜90）
+      const minA = (level === "basic") ? 30 : 20;
+      const maxA = (level === "basic") ? 80 : 90;
+
+      let A = randInt(minA, maxA);
+      let B = randInt(minA, maxA);
+      // 三角形成立：A+B < 170 くらいにしてCが10度以上になるように
+      while (A + B >= 170){
+        A = randInt(minA, maxA);
+        B = randInt(minA, maxA);
+      }
+      const C = 180 - A - B;
+      return {A, B, C};
+    }
+
+    // 正弦定理の「基本型」問題を作る
+    // パターン例：
+    //  (1) A,B,a -> b
+    //  (2) A,C,c -> a
+    //  (3) B,C,b -> c
+    // 応用では「2つ求める（bとc）」も混ぜる
+    function generateSineProblem(level){
+      const {A, B, C} = makeAngles(level);
+
+      // 辺の基準値
+      const sideMin = (level === "basic") ? 6 : 4;
+      const sideMax = (level === "basic") ? 18 : 25;
+
+      // ベースとなる辺を1つ決めて、正弦定理で他の辺を作る（整合性が取れる）
+      const a = randInt(sideMin, sideMax);
+      const b = a * sinDeg(B) / sinDeg(A);
+      const c = a * sinDeg(C) / sinDeg(A);
+
+      // 出題パターン
+      const patternsBasic = [
+        { key: "AB_a_to_b", ask: "b" },
+        { key: "AC_c_to_a", ask: "a" },
+        { key: "BC_b_to_c", ask: "c" },
+      ];
+
+      const patternsApplied = [
+        ...patternsBasic,
+        { key: "AB_a_to_bc", ask: "b_and_c" }, // bとc両方
+      ];
+
+      const patterns = (level === "basic") ? patternsBasic : patternsApplied;
+      const p = patterns[randInt(0, patterns.length - 1)];
+
+      // 問題文と解説を作る
+      let problemText = "";
+      let solutionHTML = "";
+
+      if (p.key === "AB_a_to_b"){
+        problemText =
+          `三角形ABCで、A=${A}°, B=${B}°, 辺 a=${a} のとき、辺 b を求めよ。`;
+        const bAns = round1(b);
+        solutionHTML = `
+          <div>
+            正弦定理より \\(\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}\\)。<br>
+            \\(b = a\\dfrac{\\sin B}{\\sin A}
+            = ${a}\\dfrac{\\sin ${B}^\\circ}{\\sin ${A}^\\circ}
+            \\approx ${bAns}\\)
+          </div>
+        `;
+        return { problemText, solutionHTML };
+      }
+
+      if (p.key === "AC_c_to_a"){
+        problemText =
+          `三角形ABCで、A=${A}°, C=${C}°, 辺 c=${round1(c)} のとき、辺 a を求めよ。`;
+        const cGiven = round1(c);
+        const aAns = round1(a);
+        solutionHTML = `
+          <div>
+            正弦定理より \\(\\dfrac{a}{\\sin A}=\\dfrac{c}{\\sin C}\\)。<br>
+            \\(a = c\\dfrac{\\sin A}{\\sin C}
+            = ${cGiven}\\dfrac{\\sin ${A}^\\circ}{\\sin ${C}^\\circ}
+            \\approx ${aAns}\\)
+          </div>
+        `;
+        return { problemText, solutionHTML };
+      }
+
+      if (p.key === "BC_b_to_c"){
+        const bGiven = round1(b);
+        problemText =
+          `三角形ABCで、B=${B}°, C=${C}°, 辺 b=${bGiven} のとき、辺 c を求めよ。`;
+        const cAns = round1(c);
+        solutionHTML = `
+          <div>
+            正弦定理より \\(\\dfrac{b}{\\sin B}=\\dfrac{c}{\\sin C}\\)。<br>
+            \\(c = b\\dfrac{\\sin C}{\\sin B}
+            = ${bGiven}\\dfrac{\\sin ${C}^\\circ}{\\sin ${B}^\\circ}
+            \\approx ${cAns}\\)
+          </div>
+        `;
+        return { problemText, solutionHTML };
+      }
+
+      // 応用：bとcを両方求める
+      if (p.key === "AB_a_to_bc"){
+        problemText =
+          `三角形ABCで、A=${A}°, B=${B}°, 辺 a=${a} のとき、辺 b と c を求めよ。（C も求めてよい）`;
+        const Ccalc = C;
+        const bAns = round1(b);
+        const cAns = round1(c);
+        solutionHTML = `
+          <div>
+            まず \\(C = 180^\\circ - A - B = 180^\\circ - ${A}^\\circ - ${B}^\\circ = ${Ccalc}^\\circ\\)。<br><br>
+            正弦定理より \\(\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}=\\dfrac{c}{\\sin C}\\)。<br>
+            \\(b = a\\dfrac{\\sin B}{\\sin A}
+            = ${a}\\dfrac{\\sin ${B}^\\circ}{\\sin ${A}^\\circ}
+            \\approx ${bAns}\\)<br>
+            \\(c = a\\dfrac{\\sin C}{\\sin A}
+            = ${a}\\dfrac{\\sin ${Ccalc}^\\circ}{\\sin ${A}^\\circ}
+            \\approx ${cAns}\\)
+          </div>
+        `;
+        return { problemText, solutionHTML };
+      }
+
+      // ここには来ない想定
+      return { problemText: "生成に失敗しました。", solutionHTML: "" };
+    }
+
+    // ---- 画面にカードを追加 ----
+    function renderProblems(level, count){
+      const container = document.getElementById("problems");
+      container.innerHTML = "";
+
+      for(let i=1; i<=count; i++){
+        const {problemText, solutionHTML} = generateSineProblem(level);
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const title = document.createElement("div");
+        title.className = "card-title";
+        title.textContent = `問題 ${i}`;
+
+        const body = document.createElement("div");
+        body.textContent = problemText;
+
+        const btnRow = document.createElement("div");
+        btnRow.className = "btn-row";
+
+        const toggleBtn = document.createElement("button");
+        toggleBtn.className = "btn-sub";
+        toggleBtn.textContent = "解説を表示";
+
+        const sol = document.createElement("div");
+        sol.className = "solution";
+        sol.innerHTML = solutionHTML;
+
+        toggleBtn.addEventListener("click", () => {
+          const open = sol.style.display === "block";
+          sol.style.display = open ? "none" : "block";
+          toggleBtn.textContent = open ? "解説を表示" : "解説を隠す";
+
+          // MathJax再レンダリング
+          if (window.MathJax && window.MathJax.typesetPromise){
+            MathJax.typesetPromise([sol]);
+          }
+        });
+
+        btnRow.appendChild(toggleBtn);
+        card.appendChild(title);
+        card.appendChild(body);
+        card.appendChild(btnRow);
+        card.appendChild(sol);
+        container.appendChild(card);
+      }
+
+      // MathJaxの描画
+      if (window.MathJax && window.MathJax.typesetPromise){
+        MathJax.typesetPromise([container]);
+      }
+    }
+
+    // ---- イベント ----
+    document.getElementById("generateBtn").addEventListener("click", () => {
+      const level = document.getElementById("difficulty").value;
+      const count = parseInt(document.getElementById("count").value, 10);
+      renderProblems(level, count);
+    });
+  </script>
 </body>
 </html>
