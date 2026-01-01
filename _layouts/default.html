@@ -77,13 +77,12 @@
     <!-- ▼ 記事ページ(layout: post)のときだけ上ナビを表示 -->
     {% if page.layout == "post" %}
       <div class="top-nav">
-        <div class="left">
-          {% if page.previous %}
-            <a href="{{ page.previous.url }}">← {{ page.previous.title }}</a>
-          {% else %}
-            <a href="/">← トップへ戻る</a>
-          {% endif %}
-        </div>
+  <div class="left">
+  {% if page.previous %}
+    <a href="{{ page.previous.url }}">← {{ page.previous.title }}</a>
+  {% endif %}
+</div>
+
 
         <div class="center">
           <a href="/blog/">ブログトップに戻る</a>
