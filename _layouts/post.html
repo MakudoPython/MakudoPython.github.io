@@ -1,26 +1,4 @@
 ---
 layout: default
 ---
-
-<!-- ▼ 上ナビ（先に出す） -->
-<div class="top-nav">
-  <div class="left">
-    {% if page.previous %}
-      <a href="{{ page.previous.url }}">← {{ page.previous.title }}</a>
-    {% else %}
-      <a href="/">← トップへ戻る</a>
-    {% endif %}
-  </div>
-
-  <div class="center">
-    <a href="/blog/">ブログトップに戻る</a>
-  </div>
-
-  <div class="right">
-    {% if page.next %}
-      <a href="{{ page.next.url }}">{{ page.next.title }} →</a>
-    {% endif %}
-  </div>
-</div>
-
 {{ content }}
