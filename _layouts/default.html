@@ -34,7 +34,7 @@
       margin: 0 0 12px 0;
     }
 
-    /* ▼ 追加：上ナビ */
+    /* ▼ 上ナビ */
     .top-nav {
       display: flex;
       justify-content: space-between;
@@ -74,28 +74,33 @@
 <body>
   <div class="box">
 
-    <!-- ▼ 追加：ページ上部ナビ（記事なら前後＋ブログトップ、常にトップへ戻る） -->
-    <div class="top-nav">
-      <div class="left">
-        {% if page.previous %}
-          <a href="{{ page.previous.url }}">← {{ page.previous.title }}</a>
-        {% else %}
-          <a href="/">← トップへ戻る</a>
-        {% endif %}
-      </div>
+    <!-- ▼ 記事ページ(layout: post)のときだけ上ナビを表示 -->
+    {% if page.layout == "post" %}
+      <div class="top-nav">
+        <div class="left">
+          {% if page.previous %}
+            <a href="{{ page.previous.url }}">← {{ page.previous.title }}</a>
+          {% else %}
+            <a href="/">← トップへ戻る</a>
+          {% endif %}
+        </div>
 
-      <div class="center">
-        <a href="/blog/">ブログトップに戻る</a>
-      </div>
+        <div class="center">
+          <a href="/blog/">ブログトップに戻る</a>
+        </div>
 
-      <div class="right">
-        {% if page.next %}
-          <a href="{{ page.next.url }}">{{ page.next.title }} →</a>
-        {% endif %}
+        <div class="right">
+          {% if page.next %}
+            <a href="{{ page.next.url }}">{{ page.next.title }} →</a>
+          {% endif %}
+        </div>
       </div>
-    </div>
+    {% endif %}
 
-    <p class="post-date">{{ page.date | date: "%Y/%m/%d" }}</p>
+    <!-- ▼ 日付は記事だけ表示（他ページで不要なら） -->
+    {% if page.date %}
+      <p class="post-date">{{ page.date | date: "%Y/%m/%d" }}</p>
+    {% endif %}
 
     <h1>{{ page.title }}</h1>
 
