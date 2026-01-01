@@ -8,8 +8,6 @@ title: ブログ
   <a href="/">← トップページに戻る</a>
 </p>
 
-<h1>ブログ</h1>
-
 {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
 
 {% for year in posts_by_year %}
