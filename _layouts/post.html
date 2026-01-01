@@ -1,0 +1,19 @@
+<hr>
+
+<nav class="post-nav">
+  <div class="prev">
+    {% if page.next %}
+      ← <a href="{{ page.next.url }}">{{ page.next.title }}</a>
+    {% endif %}
+  </div>
+
+  <div class="center">
+    <a href="/blog/">ブログトップに戻る</a>
+  </div>
+
+  <div class="next">
+    {% if page.previous %}
+      <a href="{{ page.previous.url }}">{{ page.previous.title }}</a> →
+    {% endif %}
+  </div>
+</nav>
