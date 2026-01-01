@@ -3,10 +3,12 @@ layout: default
 title: ブログ
 ---
 
-<!-- ▼ トップページに戻る -->
-<p style="margin-bottom: 18px;">
+<!-- ▼ 一番上：トップページに戻る -->
+<p style="margin-bottom: 12px;">
   <a href="/">← トップページに戻る</a>
 </p>
+
+<h1>ブログ</h1>
 
 {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
 
