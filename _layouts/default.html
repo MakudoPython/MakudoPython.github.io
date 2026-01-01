@@ -102,9 +102,6 @@
 
     <!-- ▼ ブログ一覧ページだけ：タイトルより上に「トップへ戻る」 -->
     {% if page.url == "/blog/" or page.url == "/blog" %}
-      <p style="margin: 0 0 12px 0;">
-        <a href="/">← トップページに戻る</a>
-      </p>
     {% endif %}
 
     <h1>{{ page.title }}</h1>
