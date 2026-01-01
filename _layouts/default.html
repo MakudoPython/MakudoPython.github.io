@@ -34,7 +34,7 @@
       margin: 0 0 12px 0;
     }
 
-    /* ▼ 上ナビ */
+    /* ▼ 記事用 上ナビ */
     .top-nav {
       display: flex;
       justify-content: space-between;
@@ -74,15 +74,14 @@
 <body>
   <div class="box">
 
-    <!-- ▼ 記事ページ(layout: post)のときだけ上ナビを表示 -->
+    <!-- ▼ 記事ページ(layout: post)のときだけ：前後ナビ -->
     {% if page.layout == "post" %}
       <div class="top-nav">
-  <div class="left">
-  {% if page.previous %}
-    <a href="{{ page.previous.url }}">← {{ page.previous.title }}</a>
-  {% endif %}
-</div>
-
+        <div class="left">
+          {% if page.previous %}
+            <a href="{{ page.previous.url }}">← {{ page.previous.title }}</a>
+          {% endif %}
+        </div>
 
         <div class="center">
           <a href="/blog/">ブログトップに戻る</a>
@@ -96,9 +95,16 @@
       </div>
     {% endif %}
 
-    <!-- ▼ 日付は記事だけ表示（他ページで不要なら） -->
-    {% if page.date %}
+    <!-- ▼ 記事ページだけ日付表示 -->
+    {% if page.layout == "post" and page.date %}
       <p class="post-date">{{ page.date | date: "%Y/%m/%d" }}</p>
+    {% endif %}
+
+    <!-- ▼ ブログ一覧ページだけ：タイトルより上に「トップへ戻る」 -->
+    {% if page.url == "/blog/" or page.url == "/blog" %}
+      <p style="margin: 0 0 12px 0;">
+        <a href="/">← トップページに戻る</a>
+      </p>
     {% endif %}
 
     <h1>{{ page.title }}</h1>
