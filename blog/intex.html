@@ -4,4 +4,12 @@ title: ブログ
 ---
 
 <h1>ブログ</h1>
-<p>日記・メモ置き場</p>
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.date | date: "%Y/%m/%d" }} - {{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
+
+<p><a href="/">← トップへ戻る</a></p>
