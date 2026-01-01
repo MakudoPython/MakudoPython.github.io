@@ -3,10 +3,19 @@ layout: default
 title: ブログ
 ---
 
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url }}">{{ post.date | date: "%Y/%m/%d" }} - {{ post.title }}</a>
-    </li>
-  {% endfor %}
-</ul>
+{% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+
+{% for year in posts_by_year %}
+  <h2>{{ year.name }}年</h2>
+  <ul>
+    {% for post in year.items %}
+      <li>
+        <a href="{{ post.url }}">
+          {{ post.date | date: "%m/%d" }} - {{ post.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+
+<p><a href="/">← トップへ戻る</a></p>
