@@ -4,32 +4,59 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{ page.title }}</title>
-<style>
-  .post-date {
-  font-size: 0.9em;
-  color: #9ca3af;   /* 少し薄いグレー */
-  margin-bottom: 6px;
-}
-  body { font-family: sans-serif; background:#0b0f19; color:#e8e8e8; margin:0; padding:40px; }
-  .box { max-width: 900px; margin:auto; background:#111827; padding:28px; border-radius:14px; }
-  a { color:#8ab4ff; }
-  h1,h2,h3 { margin-top: 1.2em; }
-  p { margin: 1.5em 0; }
-  code, pre { background:#0a0f1a; border-radius:10px; }
-  pre { padding:14px; overflow:auto; }
-</style>
 
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #0b0f19;
+      color: #e8e8e8;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .box {
+      max-width: 900px;
+      margin: auto;
+      background: #111827;
+      padding: 28px;
+      border-radius: 14px;
+    }
+
+    a { color: #8ab4ff; }
+
+    h1, h2, h3 { margin-top: 1.2em; }
+
+    p { margin: 1.5em 0; }
+
+    .post-date {
+      font-size: 0.9em;
+      color: #9ca3af;
+      margin: 0 0 12px 0;  /* ← 6pxよりちょい読みやすい */
+    }
+
+    code, pre {
+      background: #0a0f1a;
+      border-radius: 10px;
+    }
+
+    pre {
+      padding: 14px;
+      overflow: auto;
+    }
+  </style>
 </head>
+
 <body>
   <div class="box">
-<p class="post-date">
-  {{ page.date | date: "%Y/%m/%d" }}
-</p>
+    <p class="post-date">{{ page.date | date: "%Y/%m/%d" }}</p>
 
-<h1>{{ page.title }}</h1>
+    <h1>{{ page.title }}</h1>
 
-{{ content }}
-    <p style="margin-top:24px;"><a href="/">← トップへ戻る</a></p>
+    {{ content }}
+
+    <p style="margin-top:24px;">
+      <a href="/">← トップへ戻る</a>
+    </p>
   </div>
 </body>
 </html>
