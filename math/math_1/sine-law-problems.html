@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>問題集：四角形の面積（対角線と角）</title>
 
-  <!-- MathJax（数式を使う場合） -->
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
@@ -61,12 +60,15 @@
       background:#fff;
     }
 
-    .hintimg{
-      max-width:100%;
-      height:auto;
-      display:block;
-      border-radius:12px;
-      border:1px solid #e5e7eb;
+    /* ヒント用の図（少し大きめ） */
+    .figure-hint{
+      max-width: 640px;
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 12px auto;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
     }
 
     .backlinks{ margin-top:22px; }
@@ -77,9 +79,7 @@
 <body>
   <div class="box">
     <h1>問題集：四角形の面積（対角線と角）</h1>
-    <p class="muted">
-      解説ボタンで解説を表示/非表示できます。ヒントボタンで図を表示できます。
-    </p>
+    <p class="muted">解説ボタンで解説を表示/非表示できます。ヒントボタンで図を表示できます。</p>
 
     <div class="card">
       <h2>問題 1</h2>
@@ -89,50 +89,40 @@
       </p>
 
       <div class="btnrow">
-        <button type="button" data-toggle="hint1" data-on="ヒントを隠す" data-off="ヒントを表示">
-          ヒントを表示
-        </button>
-        <button type="button" data-toggle="sol1" data-on="解説を隠す" data-off="解説を表示">
-          解説を表示
-        </button>
+        <button type="button" data-toggle="hint1" data-on="ヒントを隠す" data-off="ヒントを表示">ヒントを表示</button>
+        <button type="button" data-toggle="sol1" data-on="解説を隠す" data-off="解説を表示">解説を表示</button>
       </div>
 
-      <!-- ヒント（図） -->
-    <div id="hint1" class="panel">
-      <p style="margin:0;">
-        対角線の交点を \(O\) とする。
-        \(AO=x_1,\ CO=x_2,\ BO=y_1,\ DO=y_2\) とおいて、
-        四角形を小さな三角形に分けて考えてみよう。
-      </p>
+      <div id="hint1" class="panel">
+        <p style="margin-top:0;">
+          対角線の交点を \(O\) とする。
+          \(AO=x_1,\ CO=x_2,\ BO=y_1,\ DO=y_2\) とおいて、
+          四角形を小さな三角形に分けて考えてみよう。
+        </p>
+
+        <img
+          class="figure-hint"
+          src="./images/quad-diagonal-hint.svg"
+          alt="対角線で分割した四角形の図"
+        >
+      </div>
+
+      <div id="sol1" class="panel">
+        <p>
+          対角線の交点を \(O\) とすると、四角形の面積は
+          \(\triangle AOB, \triangle BOC, \triangle COD, \triangle DOA\)
+          の面積の和である。
+        </p>
+        <p>
+          各三角形に \(\frac12 ab\sin\theta\) を用いると，
+          \[
+            S=\frac12 (AO+CO)(BO+DO)\sin\theta
+            =\frac12 xy\sin\theta
+          \]
+          となる。
+        </p>
+      </div>
     </div>
-
-
-      <!-- 解説（今は空でOK） -->
-    <div id="sol1" class="panel">
-      <p>
-        対角線の交点を \(O\) とすると、
-        四角形の面積は
-        \(\triangle AOB, \triangle BOC, \triangle COD, \triangle DOA\)
-        の面積の和である。
-      </p>
-    
-      <img
-        class="hintimg"
-        src="./images/quad-diagonal-hint.svg"
-        alt="対角線で分割した四角形の図"
-      >
-    
-      <p>
-        各三角形に
-        \(\frac12 ab\sin\theta\) を用いると，
-        \[
-          S=\frac12 (AO+CO)(BO+DO)\sin\theta
-           =\frac12 xy\sin\theta
-        \]
-        となる。
-      </p>
-    </div>
-
 
     <div class="backlinks">
       <a href="./sine-law.html">← 正弦定理に戻る</a>
@@ -141,7 +131,6 @@
   </div>
 
   <script>
-    // ボタンで表示/非表示をトグルする（解説・ヒント共通）
     document.querySelectorAll("button[data-toggle]").forEach(btn => {
       btn.addEventListener("click", () => {
         const id = btn.getAttribute("data-toggle");
@@ -155,7 +144,6 @@
         const offText = btn.getAttribute("data-off") || "表示";
         btn.textContent = isOpen ? offText : onText;
 
-        // MathJaxがあるなら、開いたときに再描画（数式がある場合の保険）
         if (!isOpen && window.MathJax && window.MathJax.typesetPromise) {
           window.MathJax.typesetPromise([panel]).catch(() => {});
         }
