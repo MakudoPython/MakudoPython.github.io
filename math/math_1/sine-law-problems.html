@@ -108,12 +108,31 @@
 
 
       <!-- 解説（今は空でOK） -->
-      <div id="sol1" class="panel">
-        <p style="margin:0;">
-          （ここに解説を書く予定。方針が決まったら追記）
-        </p>
-      </div>
+    <div id="sol1" class="panel">
+      <p>
+        対角線の交点を \(O\) とすると、
+        四角形の面積は
+        \(\triangle AOB, \triangle BOC, \triangle COD, \triangle DOA\)
+        の面積の和である。
+      </p>
+    
+      <img
+        class="hintimg"
+        src="./images/quad-diagonal-hint.svg"
+        alt="対角線で分割した四角形の図"
+      >
+    
+      <p>
+        各三角形に
+        \(\frac12 ab\sin\theta\) を用いると，
+        \[
+          S=\frac12 (AO+CO)(BO+DO)\sin\theta
+           =\frac12 xy\sin\theta
+        \]
+        となる。
+      </p>
     </div>
+
 
     <div class="backlinks">
       <a href="./sine-law.html">← 正弦定理に戻る</a>
