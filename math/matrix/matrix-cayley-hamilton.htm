@@ -1,1 +1,64 @@
 
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ケーリー・ハミルトンの定理 | Makudo</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 40px;
+      line-height: 1.7;
+    }
+    .box {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+    h1 { margin-top: 0; }
+    h2 { margin-top: 32px; }
+    .formula {
+      background: #f7f7f7;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin: 16px 0;
+      font-size: 1.05em;
+    }
+    a { color: #5a2bd8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back { margin-top: 24px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>ケーリー・ハミルトンの定理</h1>
+
+    <h2>定理の主張</h2>
+    <p>2次正方行列 A = ((a, b), (c, d)) について、次の等式が成り立つ。</p>
+    <div class="formula">A² − (a+d)A + (ad−bc)E = O</div>
+    <p>（E は単位行列、O は零行列）</p>
+
+    <h2>証明</h2>
+    <div class="formula">
+      A − aE = ((0, b), (c, d−a))<br>
+      A − dE = ((a−d, b), (c, 0))
+    </div>
+    <p>この2つの積を計算すると</p>
+    <div class="formula">(A−aE)(A−dE) = ((bc, 0), (0, bc)) = bcE</div>
+    <p>一方で展開すると</p>
+    <div class="formula">(A−aE)(A−dE) = A² − (a+d)A + adE</div>
+    <p>よって</p>
+    <div class="formula">
+      A² − (a+d)A + adE = bcE<br>
+      A² − (a+d)A + (ad−bc)E = O
+    </div>
+
+    <a class="back" href="../">← 数学トップに戻る</a>
+  </div>
+</body>
+</html>
